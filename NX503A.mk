@@ -27,6 +27,9 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.gyroscope.xml:system/etc/permissions/android.hardware.sensor.gyroscope.xml \
     frameworks/native/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
     frameworks/native/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
+    frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
+    frameworks/native/data/etc/android.hardware.sensor.barometer.xml:system/etc/permissions/android.hardware.sensor.barometer.xml \
+    frameworks/native/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
@@ -43,23 +46,39 @@ PRODUCT_COPY_FILES += \
 
 # Custom init / uevent
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.rc:root/init.qcom.rc \
     $(LOCAL_PATH)/prebuilt/rootdir/fstab.qcom:root/fstab.qcom \
+    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.rc:root/init.qcom.rc \
+    $(LOCAL_PATH)/prebuilt/rootdir/init.nubia.rc:root/init.nubia.rc \
+    $(LOCAL_PATH)/prebuilt/rootdir/init.target.rc:root/init.target.rc \
+    $(LOCAL_PATH)/prebuilt/rootdir/init.poweroffcharge.rc:root/init.poweroffcharge.rc \
     $(LOCAL_PATH)/prebuilt/rootdir/ueventd.qcom.rc:root/ueventd.qcom.rc
 
 # USB function switching
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/rootdir/init.nubia.usb.rc:root/init.nubia.usb.rc
-#    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.rc:root/init.qcom.rc
+#    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.usb.rc:root/init.qcom.usb.rc
 
-# Rcovery
+# Qcom shell script
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/rootdir/init.recovery.qcom.rc:root/init.recovery.qcom.rc \
-    $(LOCAL_PATH)/prebuilt/rootdir/fstab.qcom:recovery/root/fstab.qcom
+    $(LOCAL_PATH)/prebuilt/rootdir/init.nubia.sh:root/init.nubia.sh \
+    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
+    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.class_main.sh:root/init.qcom.class_main.sh \
+    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.early_boot.sh:root/init.qcom.early_boot.sh \
+    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.factory.sh:root/init.qcom.factory.sh \
+    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.ril.sh:root/init.qcom.ril.sh \
+    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.sh:root/init.qcom.sh \
+    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.syspart_fixup.sh:root/init.qcom.syspart_fixup.sh \
+    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.usb.sh:root/init.qcom.usb.sh \
+    $(LOCAL_PATH)/prebuilt/rootdir/init.wireless_mac.sh:root/init.wireless_mac.sh \
+    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.sh:root/init.qcom.sh \
+
+# Recovery
+#PRODUCT_COPY_FILES += \
+#    $(LOCAL_PATH)/recovery/init.recovery.qcom.rc:root/init.recovery.qcom.rc
 
 # Post recovery script
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/recovery/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
+    $(LOCAL_PATH)/recovery/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
 
 # Additional sbin stuff
 PRODUCT_COPY_FILES += \
@@ -67,10 +86,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/rootdir/sbin/poweroffcharge:root/sbin/poweroffcharge \
     $(LOCAL_PATH)/prebuilt/rootdir/sbin/security_boot_check:root/sbin/security_boot_check
 
-# Audio
+# Audio configs
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
-    $(LOCAL_PATH)/rootdir/system/etc/snd_soc_msm/snd_soc_msm_Taiko:system/etc/snd_soc_msm/snd_soc_msm_Taiko
+    $(LOCAL_PATH)/prebuilt/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
+    $(LOCAL_PATH)/prebuilt/system/etc/snd_soc_msm/snd_soc_msm_Taiko:system/etc/snd_soc_msm/snd_soc_msm_Taiko
 
 # BT
 PRODUCT_COPY_FILES += \
@@ -95,8 +114,8 @@ PRODUCT_COPY_FILES += \
 
 # Prima wifi config
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/system/etc/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh \
-    $(LOCAL_PATH)/prebuilt/system/etc/firmware/wlan/prima/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat
+    $(LOCAL_PATH)/prebuilt/system/etc/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh
+#    $(LOCAL_PATH)/prebuilt/system/etc/firmware/wlan/prima/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -108,20 +127,20 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/system/usr/idc/cyttsp4_mt.idc:system/usr/idc/cyttsp4_mt.idc \
     $(LOCAL_PATH)/prebuilt/system/usr/idc/zte_cap_touchscreen.idc:system/usr/idc/zte_cap_touchscreen.idc \
     $(LOCAL_PATH)/prebuilt/system/usr/keylayout/atmel_mxt_ts.kl:system/usr/keylayout/atmel_mxt_ts.kl \
-    $(LOCAL_PATH)/prebuiltr/system/usr/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl
+    $(LOCAL_PATH)/prebuilt/system/usr/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl
 
 # Thermal monitor configuration
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuiltr/system/etc/thermald-8974.conf:system/etc/thermald-8974.conf \
-    $(LOCAL_PATH)/prebuiltr/system/etc/thermal-engine-8974.conf:system/etc/thermal-engine-8974.conf
+    $(LOCAL_PATH)/prebuilt/system/etc/thermald-8974.conf:system/etc/thermald-8974.conf \
+    $(LOCAL_PATH)/prebuilt/system/etc/thermal-engine-8974.conf:system/etc/thermal-engine-8974.conf
 
 # Sensors
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuiltr/system/etc/sap.conf:system/etc/sap.conf
+    $(LOCAL_PATH)/prebuilt/system/etc/sap.conf:system/etc/sap.conf
 
 # Vold
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuiltr/system/etc/vold.fstab:system/etc/vold.fstab
+    $(LOCAL_PATH)/prebuilt/system/etc/vold.fstab:system/etc/vold.fstab
 
 # NFC Permissions
 PRODUCT_COPY_FILES += \
@@ -165,7 +184,8 @@ PRODUCT_PACKAGES += \
     audio.usb.default \
     audio.r_submix.default \
     libaudio-resampler \
-    tinymix
+    tinymix \
+    libtinyxml
 
 # BT
 PRODUCT_PACKAGES += \
@@ -198,6 +218,20 @@ PRODUCT_PACKAGES += \
     libmm-omxcore \
     libstagefrighthw
 
+# qcom need
+PRODUCT_PACKAGES += \
+    mm-jpeg-dec-test \
+    mm-jpeg-enc-test \
+    mm-qjpeg-dec-test \
+    mm-qjpeg-enc-test \
+    mm-qomx-ienc-test \
+    mm-vdec-omx-test \
+    mm-venc-omx-test720p \
+    mm-video-driver-test \
+    mm-video-encdrv-test
+    
+
+
 # WIFI MAC update
 #PRODUCT_PACKAGES += \
 #    mac-update
@@ -224,15 +258,16 @@ PRODUCT_PACKAGES += \
     libtime_genoff
 endif
 
-# OpenGL ES 2.0
+# OpenGL ES 3.0
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=131072
+    ro.opengles.version=196608
+#    ro.opengles.version=131072
 
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.composition.type=c2d
 
 # Set default USB interface
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp,adb
 
 # GPS
@@ -309,7 +344,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.multiple=0
 
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
 
 # QCOM
@@ -318,12 +353,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # QC Perf
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.extension_library=/system/lib/libqc-opt.so
+    ro.vendor.extension_library=/system/vendor/lib/libqc-opt.so
 
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=15
 
-# Include non-opensource parts
+# Include NX503A-vendor
 $(call inherit-product, vendor/zte/NX503A/NX503A-vendor.mk)
+
+# OpenGL ES 3.0
+$(call inherit-product, vendor/zte/qcom-common/qcom-common-vendor-330.mk)
+
+

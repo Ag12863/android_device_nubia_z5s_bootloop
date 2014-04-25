@@ -7,8 +7,8 @@ TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := NX503A,nx503a,Z5S,z5s
-TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/zte/NX503A/releasetools/zte_ota_from_target_files
+TARGET_OTA_ASSERT_DEVICE := NX503A,nx503a
+#TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/zte/NX503A/releasetools/zte_ota_from_target_files
 
 # Platform
 TARGET_BOARD_PLATFORM := msm8974
@@ -18,7 +18,7 @@ TARGET_BOOTLOADER_BOARD_NAME := MSM8974
 # ZTE Platform
 BOARD_VENDOR_PLATFORM := nubia
 
-BOARD_LIB_DUMPSTATE := libdumpstate.zte
+BOARD_LIB_DUMPSTATE := libdumpstate.nubia
 
 # Architecture
 TARGET_ARCH := arm
@@ -42,7 +42,7 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 2684354560
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # Vold
-BOARD_VOLD_MAX_PARTITIONS := 26
+BOARD_VOLD_MAX_PARTITIONS := 23
 #TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/file
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/msm_dwc3/f9200000.dwc3/gadget/lun%d/file"
 
@@ -55,8 +55,8 @@ TARGET_KRAIT_BIONIC_BBTHRESH  := 64
 TARGET_KRAIT_BIONIC_PLDSIZE   := 64
 
 # Kernel information
-TARGET_KERNEL_CONFIG := msm8974-NX503A_defconfig
-#TARGET_KERNEL_CONFIG := cm_NX503A_defconfig
+#TARGET_KERNEL_CONFIG := msm8974-NX503A_defconfig
+TARGET_KERNEL_CONFIG := cm_NX503A_defconfig
 TARGET_KERNEL_SOURCE := kernel/zte/NX503A
 #TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
 BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3
@@ -64,7 +64,7 @@ BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01E00000
 
-BOARD_KERNEL_SEPARATED_DT := true
+BOARD_KERNEL_SEPARATED_DT := false
 
 # Audio
 TARGET_USES_QCOM_COMPRESSED_AUDIO := true
@@ -101,8 +101,9 @@ USE_CAMERA_STUB := true
 # Display
 TARGET_QCOM_DISPLAY_VARIANT := mdss
 #TARGET_QCOM_DISPLAY_VARIANT := caf
-TARGET_USES_ION := true
 TARGET_USES_C2D_COMPOSITION := true
+
+TARGET_USES_ION := true
 
 # Graphics
 BOARD_EGL_CFG := device/zte/NX503A/prebuilt/system/lib/egl/egl.cfg
@@ -166,8 +167,8 @@ WIFI_DRIVER_FW_PATH_P2P:= ""
 BOARD_CUSTOM_BOOTIMG_MK := device/zte/NX503A/custombootimg.mk
 
 # Recovery
-#TARGET_RECOVERY_INITRC := device/zte/NX503A/recovery/recovery.rc
-TARGET_RECOVERY_FSTAB := device/zte/NX503A/prebuilt/root/fstab.qcom
+TARGET_RECOVERY_INITRC := device/zte/NX503A/recovery/init.rc
+TARGET_RECOVERY_FSTAB := device/zte/NX503A/prebuilt/rootdir/fstab.qcom
 RECOVERY_FSTAB_VERSION := 2
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 BOARD_HAS_NO_SELECT_BUTTON := true

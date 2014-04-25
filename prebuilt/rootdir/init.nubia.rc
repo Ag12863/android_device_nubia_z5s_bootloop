@@ -1,0 +1,258 @@
+on init
+
+    # ZTE: Set 1 /sys/devices/virtual/graphics/fb1 to power on HDMI
+    write /sys/devices/virtual/graphics/fb1/hpd 1
+
+    # ZTE: disable ipv6 on rmnet0
+    on property:ril.ipv6.rmnet0.enable=0
+    write /proc/sys/net/ipv6/conf/rmnet0/disable_ipv6 1    
+
+    # ZTE: DRM create the OMA
+    mkdir /data/oma 0777
+    chmod 0777 /data/oma
+
+    chmod 0664 /system/media/audio/ui/bootup.aac
+
+    # Permission for Haptics 
+    chown system system /dev/drv2605
+    chmod 0660 /dev/drv2605
+
+    # Permission for Sensor
+    chown system system /sys/class/gesture/gesture/enable
+
+    mkdir /persist/proxdata 0775 system system
+    chown system system /persist/proxdata
+    chmod 0775 /persist/proxdata
+    chown system system /sys/class/proximity/proximity/enable
+    chown system system /sys/class/proximity/proximity/prox_manual_calibrate_threshold
+    chown system system /sys/class/proximity/proximity/prox_init
+    chown system system /sys/class/proximity/proximity/prox_thres
+    chown system system /sys/class/proximity/proximity/chip_name
+    chown system system /sys/class/proximity/proximity/prox_calibrate
+    chown system system /sys/class/proximity/proximity/prox_calibrate_start
+    chown system system /sys/class/proximity/proximity/prox_calibrate_result
+    chown system system /sys/class/proximity/proximity/prox_data_max
+    chown system system /sys/class/proximity/proximity/prox_debug
+    chown system system /sys/class/proximity/proximity/prox_thres_max
+    chown system system /sys/class/proximity/proximity/prox_thres_min
+    chown system system /sys/class/proximity/proximity/prox_threshold_high
+    chown system system /sys/class/proximity/proximity/prox_threshold_low
+    chown system system /sys/class/proximity/proximity/prox_thres_param_high
+    chown system system /sys/class/proximity/proximity/prox_thres_param_low
+    chown system system /sys/class/proximity/proximity/prox_pluse_length
+    chown system system /sys/class/proximity/proximity/prox_thres_pulse_count
+    chown system system /sys/class/proximity/proximity/prox_wakelock
+    chown system system /sys/class/proximity/proximity/prox_phone_is_sleep
+
+    # Permission for Lights
+    chown system system /sys/class/light/light/enable
+    chown system system /sys/class/light/light/delay
+
+    # Permission for Temperature
+    chown system system /sys/class/temperature/temperature/enable
+    chown system system /sys/class/temperature/temperature/temperature_poll_time
+
+    # Permission for Humidity
+    chown system system /sys/class/humidity/humidity/enable
+    chown system system /sys/class/humidity/humidity/humidity_poll_time
+
+    # Permission for Compass
+    chown system system /sys/class/sensor/compass/int_pin
+
+    chown system system /sys/bus/ttsp4/devices/main_ttsp_core.cyttsp4_i2c_adapter/easy_wakeup_gesture
+
+    # Assign TCP buffer thresholds to be ceiling value of technology maximums
+    # Increased technology maximums should be reflected here.
+    write /proc/sys/net/core/rmem_max  2097152
+    write /proc/sys/net/core/wmem_max  2097152
+
+    # Set the property to indicate type of virtual display to 0
+    # 0 indicates that virtual display is not a Wifi display and that the
+    # session is not exercised through RemoteDisplay in the android framework
+    #setprop persist.sys.wfd.virtual 0
+
+    # ZTE: PowerManage
+    setprop sys.cpu 1512000
+    setprop sys.gpu 400000000
+    setprop sys.cpupath /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    setprop sys.governorpath /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    setprop sys.cpumode disabled
+    setprop sys.gpumode disabled
+
+    setprop sys.bootable disable
+    setprop sys.pkg com.nubia.powermanage
+    setprop sys.cls com.nubia.powermanage.netmanage.BootAndShutdownBroadcast
+
+service setappboot /system/bin/set_app_boot.sh
+    user root
+    group root
+    disabled
+    oneshot
+
+on property:persist.service.setappboot=1
+    start setappboot
+
+on property:persist.service.setappboot=0
+    stop  setappboot
+
+service setcpufreq  /system/bin/set_cpu_max_freq.sh
+    user system
+    group system
+    disabled
+
+on property:persist.service.setcpufreq=1
+    start setcpufreq 
+
+on property:persist.service.setcpufreq=0
+    stop setcpufreq 
+
+service setgpufreq  /system/bin/set_gpu_max_freq.sh
+    user root
+    group root
+    disabled
+
+on property:persist.service.setgpufreq=1
+    start setgpufreq 
+on property:persist.service.setgpufreq=0
+    stop setgpufreq 
+    
+service setcpumode /system/bin/set_cpu_mode.sh
+    user root
+    group root
+    disabled
+
+on property:persist.service.setcpumode=1
+    start setcpumode 
+on property:persist.service.setcpumode=0
+    stop setcpumode
+
+service setgpumode /system/bin/set_gpu_mode.sh
+    user root
+    group root
+    disabled
+    
+on property:persist.service.setgpumode=1
+    start setgpumode
+on property:persist.service.setgpumode=0
+    stop setgpumode
+
+service setgovernor /system/bin/set_cpu_governor.sh
+    user root
+    group root
+    disabled
+
+on property:persist.service.setgovernor=1
+    start setgovernor
+
+on property:persist.service.setgovernor=0
+    stop setgovernor
+
+service DrmHost /system/bin/DrmHost
+    class main
+
+service logRedirector /system/bin/logRedirector
+    class main
+    socket logRedirector stream 0660 root system
+
+    # Bootsound
+service testaac /system/bin/mm-adec-omxaac-test /system/media/audio/ui/bootup.aac -u 1 -m 2 -n 2 -r 48000 -i 1 -v 100 -f --bootsound
+    class main
+    user root
+    group system audio
+    disabled
+    oneshot
+
+service btState /system/bin/btState
+     class main
+     user root
+     group root
+     disabled
+     oneshot
+
+on property:persist.service.btenabled=1
+     start btState
+
+on property:persist.service.btenabled=0
+     stop  btState
+
+service btCommand /system/bin/btCommand
+     class main
+     user root
+     group root
+     disabled
+     oneshot
+
+on property:persist.service.btcmd=1
+     start btCommand
+
+on property:persist.service.btcmd=0
+     stop  btCommand
+
+service check_addr /system/bin/check_addr -a
+    class main
+    user root
+    group root
+    disabled
+    oneshot
+        
+on property:persist.service.check_addr=1
+    start check_addr
+
+on property:persist.service.check_addr=0
+    stop  check_addr
+    
+#service appdatabackup /system/bin/appdatabackup
+#    class main
+#    socket appdatabackup stream 600 system system
+
+    # ZTE: Start gesture process
+service gesture /system/bin/tmg3993
+    class main
+
+    # ZTE: Gesture on/off
+on property:persist.sys.gesture=on
+    write /sys/class/gesture/gesture/enable  1
+
+on property:persist.sys.gesture=off
+    write /sys/class/gesture/gesture/enable  0
+
+service dmapp /system/bin/dmapp
+    class main
+
+   # ZTE: camera effect
+service CameraServiceEx /system/bin/CameraEffectService
+    class main
+    oneshot
+
+    # ZTE: Lcd image enhance
+on property:persist.sys.image.enhance=w
+    write /sys/kernel/lcd_enhance/disptype 24
+	
+on property:persist.sys.image.enhance=n
+    write /sys/kernel/lcd_enhance/disptype 25
+	
+on property:persist.sys.image.enhance=i
+    write /sys/kernel/lcd_enhance/disptype 26
+
+on property:persist.service.adbd=tcp
+    setprop service.adb.tcp.port 5555
+    stop adbd
+    start adbd
+
+on property:persist.service.adbd=usb
+    setprop service.adb.tcp.port -1
+    stop adbd
+    start adbd
+
+#service FontsWilluse /system/bin/sh /system/etc/fonts_check.sh
+#    class main
+#    user root
+#    group root
+#    oneshot
+
+#service shutdownanim /system/bin/shutdownanimation
+#    class main
+#    user root
+#    group root
+#    disabled
+#    oneshot
