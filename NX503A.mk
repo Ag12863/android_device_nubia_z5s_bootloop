@@ -47,30 +47,37 @@ PRODUCT_COPY_FILES += \
 # Custom init / uevent
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/rootdir/fstab.qcom:root/fstab.qcom \
+    $(LOCAL_PATH)/prebuilt/rootdir/init.rc:root/init.rc \
     $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.rc:root/init.qcom.rc \
-    $(LOCAL_PATH)/prebuilt/rootdir/init.nubia.rc:root/init.nubia.rc \
-    $(LOCAL_PATH)/prebuilt/rootdir/init.target.rc:root/init.target.rc \
-    $(LOCAL_PATH)/prebuilt/rootdir/init.poweroffcharge.rc:root/init.poweroffcharge.rc \
-    $(LOCAL_PATH)/prebuilt/rootdir/ueventd.qcom.rc:root/ueventd.qcom.rc
+    $(LOCAL_PATH)/prebuilt/rootdir/init.poweroffcharge.rc:root/lpm.rc \
+    $(LOCAL_PATH)/prebuilt/rootdir/ueventd.qcom.rc:root/ueventd.qcom.rc \
+    $(LOCAL_PATH)/prebuilt/rootdir/init.target.rc:root/init.target.rc
+#    $(LOCAL_PATH)/prebuilt/rootdir/init.nubia.rc:root/init.nubia.rc \
 
 # USB function switching
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/rootdir/init.nubia.usb.rc:root/init.nubia.usb.rc
-#    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.usb.rc:root/init.qcom.usb.rc
+#    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.usb.rc:root/init.qcom.usb.rc \
 
 # Qcom shell script
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/rootdir/init.nubia.sh:root/init.nubia.sh \
-    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
-    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.class_main.sh:root/init.qcom.class_main.sh \
-    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.early_boot.sh:root/init.qcom.early_boot.sh \
-    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.factory.sh:root/init.qcom.factory.sh \
-    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.ril.sh:root/init.qcom.ril.sh \
     $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.sh:root/init.qcom.sh \
-    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.syspart_fixup.sh:root/init.qcom.syspart_fixup.sh \
-    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.usb.sh:root/init.qcom.usb.sh \
-    $(LOCAL_PATH)/prebuilt/rootdir/init.wireless_mac.sh:root/init.wireless_mac.sh \
-    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.sh:root/init.qcom.sh \
+    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.usb.sh:root/init.qcom.usb.sh
+
+#    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
+#    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.class_main.sh:root/init.qcom.class_main.sh \
+#   $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.early_boot.sh:root/init.qcom.early_boot.sh \
+#    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.factory.sh:root/init.qcom.factory.sh \
+##    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.ril.sh:root/init.qcom.ril.sh \
+#    $(LOCAL_PATH)/prebuilt/rootdir/init.qcom.syspart_fixup.sh:root/init.qcom.syspart_fixup.sh \
+
+#    $(LOCAL_PATH)/prebuilt/rootdir/init.wireless_mac.sh:root/init.wireless_mac.sh
+
+#
+#PRODUCT_COPY_FILES += \
+#    $(LOCAL_PATH)/prebuilt/rootdir/res/images:root/init.nubia.sh \
+
 
 # Recovery
 #PRODUCT_COPY_FILES += \
@@ -81,10 +88,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/recovery/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
 
 # Additional sbin stuff
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/rootdir/charger:root/charger \
-    $(LOCAL_PATH)/prebuilt/rootdir/sbin/poweroffcharge:root/sbin/poweroffcharge \
-    $(LOCAL_PATH)/prebuilt/rootdir/sbin/security_boot_check:root/sbin/security_boot_check
+#PRODUCT_COPY_FILES += \
+#    $(LOCAL_PATH)/prebuilt/rootdir/sbin/poweroffcharge:root/sbin/poweroffcharge
+#    $(LOCAL_PATH)/prebuilt/rootdir/charger:root/charger \
+#    $(LOCAL_PATH)/prebuilt/rootdir/sbin/security_boot_check:root/sbin/security_boot_check
 
 # Audio configs
 PRODUCT_COPY_FILES += \
@@ -92,12 +99,12 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/system/etc/snd_soc_msm/snd_soc_msm_Taiko:system/etc/snd_soc_msm/snd_soc_msm_Taiko
 
 # BT
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/system/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh
+#PRODUCT_COPY_FILES += \
+#    $(LOCAL_PATH)/prebuilt/system/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh
 
 # FM Radio
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/system/etc/init.qcom.fm.sh:system/etc/init.qcom.fm.sh
+#PRODUCT_COPY_FILES += \
+#    $(LOCAL_PATH)/prebuilt/system/etc/init.qcom.fm.sh:system/etc/init.qcom.fm.sh
 
 # GPS
 PRODUCT_COPY_FILES += \
@@ -109,12 +116,12 @@ PRODUCT_COPY_FILES += \
 
 # WPA supplicant config
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/system/etc/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
+    $(LOCAL_PATH)/prebuilt/system/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
     $(LOCAL_PATH)/prebuilt/system/etc/wifi/wpa_supplicant_wcn.conf:system/etc/wifi/wpa_supplicant_wcn.conf
 
 # Prima wifi config
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/system/etc/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh
+#PRODUCT_COPY_FILES += \
+#    $(LOCAL_PATH)/prebuilt/system/etc/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh
 #    $(LOCAL_PATH)/prebuilt/system/etc/firmware/wlan/prima/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat
 
 # Media
@@ -131,8 +138,8 @@ PRODUCT_COPY_FILES += \
 
 # Thermal monitor configuration
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/system/etc/thermald-8974.conf:system/etc/thermald-8974.conf \
-    $(LOCAL_PATH)/prebuilt/system/etc/thermal-engine-8974.conf:system/etc/thermal-engine-8974.conf
+    $(LOCAL_PATH)/prebuilt/system/etc/thermald-8974.conf:system/etc/thermald.conf \
+    $(LOCAL_PATH)/prebuilt/system/etc/thermal-engine-8974.conf:system/etc/thermal-engine.conf
 
 # Sensors
 PRODUCT_COPY_FILES += \
@@ -142,11 +149,15 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/system/etc/vold.fstab:system/etc/vold.fstab
 
+# Camera
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/system/vendor/lib/libmmcamera_cac_lib.so:system/vendor/lib/libmmcamera_cac_lib.so
+
+
 # NFC Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
-    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
-    frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.google.android.nfc_extras.xml \
+    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml
 
 # NFCEE access control
 ifeq ($(TARGET_BUILD_VARIANT),user)
@@ -160,210 +171,195 @@ PRODUCT_COPY_FILES += \
 
 # NFC Support
 PRODUCT_PACKAGES += \
-    libnfc \
-    libnfc_jni \
-    Nfc \
-    Tag \
-    com.android.nfc_extras
+   libnfc \
+   libnfc_jni \
+   Nfc \
+   Tag \
+   com.android.nfc_extras \
+   nfc.default
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
-    e2fsck
-
-# Live Wallpapers
-PRODUCT_PACKAGES += \
-    LiveWallpapers \
-    LiveWallpapersPicker \
-    VisualizationWallpapers \
+   e2fsck
 
 # Audio
 PRODUCT_PACKAGES += \
-    audio_policy.msm8974 \
-    audio.primary.msm8974 \
-    audio.a2dp.default \
-    audio.usb.default \
-    audio.r_submix.default \
-    libaudio-resampler \
-    tinymix \
-    libtinyxml
+   audio_policy.msm8974 \
+   audio.primary.msm8974 \
+   audio.a2dp.default \
+   audio.usb.default \
+   audio.r_submix.default \
+   libaudio-resampler \
+   libalsa-intf \
+   tinymix \
+   libqcomvisualizer \
+   libqcomvoiceprocessing \
 
 # BT
+#PRODUCT_PACKAGES += \
+#   hci_qcomm_init
+
+# Camera
 PRODUCT_PACKAGES += \
-    hci_qcomm_init
+   libxml2
+
+# Camera wrapper
+PRODUCT_PACKAGES += \
+    camera.qcom
 
 # QCOM Display
 PRODUCT_PACKAGES += \
-    hwcomposer.msm8974 \
-    gralloc.msm8974 \
-    copybit.msm8974 \
-    libgenlock \
-    libmemalloc \
-    liboverlay \
-    libqdutils \
-    libtilerenderer \
-    libI420colorconvert
+   hwcomposer.msm8974 \
+   gralloc.msm8974 \
+   copybit.msm8974 \
+   libgenlock \
+   libmemalloc \
+   liboverlay \
+   libqdutils \
+   libtilerenderer \
+#   libI420colorconvert
 
 # Omx
 PRODUCT_PACKAGES += \
-    libOmxAacEnc \
-    libOmxAmrEnc \
-    libOmxCore \
-    libOmxEvrcEnc \
-    libOmxQcelp13Enc \
-    libOmxVdec \
-    libOmxVenc \
-    libc2dcolorconvert \
-    libdashplayer \
-    libdivxdrmdecrypt \
-    libmm-omxcore \
-    libstagefrighthw
+   libOmxAacEnc \
+   libOmxAmrEnc \
+   libOmxCore \
+   libOmxEvrcEnc \
+   libOmxQcelp13Enc \
+   libOmxVdec \
+   libOmxVenc \
+   libc2dcolorconvert \
+   libOmxVdecHevc \
+   libdashplayer \
+   libdivxdrmdecrypt \
+   libmm-omxcore \
+   libstagefrighthw
 
-# qcom need
+# Extended media support
 PRODUCT_PACKAGES += \
-    mm-jpeg-dec-test \
-    mm-jpeg-enc-test \
-    mm-qjpeg-dec-test \
-    mm-qjpeg-enc-test \
-    mm-qomx-ienc-test \
-    mm-vdec-omx-test \
-    mm-venc-omx-test720p \
-    mm-video-driver-test \
-    mm-video-encdrv-test
-    
+   qcmediaplayer
 
+PRODUCT_BOOT_JARS += qcmediaplayer
 
-# WIFI MAC update
-#PRODUCT_PACKAGES += \
-#    mac-update
+# GPS
+PRODUCT_PACKAGES += \
+   gps.msm8974 \
+   libloc_adapter \
+   libloc_eng \
+   libloc_api_v02 \
+   libloc_ds_api \
+   libloc_core \
+   libizat_core \
+   libgeofence \
+   libgps.utils \
+   flp.msm8974
+
+# for off charging mode
+PRODUCT_PACKAGES += \
+    charger \
+#    charger_res_images
 
 # Power
 PRODUCT_PACKAGES += \
-    power.msm8974
+   power.qcom
 
 # Lights
 PRODUCT_PACKAGES += \
-    lights.msm8974
+   lights.msm8974
 
 # USB
 PRODUCT_PACKAGES += \
-    librs_jni \
-    com.android.future.usb.accessory
+   com.android.future.usb.accessory
 
-# Qualcomm random numbers generated
+# WLAN
+#PRODUCT_PACKAGES += \
+#   wcnss_service \
+#
+#   libQWiFiSoftApCfg
+
+# WLAN
 PRODUCT_PACKAGES += \
-    qrngd
+   libnetcmdiface \
+   libnl_2
 
-ifeq ($(BOARD_USES_QC_TIME_SERVICES),true)
+# Qualcomm Random Numbers Generator
 PRODUCT_PACKAGES += \
-    libtime_genoff
-endif
+   qrngd \
+   qrngp
 
-# OpenGL ES 3.0
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=196608
-#    ro.opengles.version=131072
+PRODUCT_PACKAGES += \
+   libemoji \
 
+# RIL
 PRODUCT_PROPERTY_OVERRIDES += \
-    debug.composition.type=c2d
-
-# Set default USB interface
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp,adb
-
-# GPS
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.gps.qc_nlp_in_use=0
-
-# Audio
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.audio.handset.mic=analog \
-    persist.audio.hp=true \
-    ro.qc.sdk.audio.fluencetype=none \
-    persist.speaker.prot.enable=false \
-    lpa.decode=false \
-    lpa.use-stagefright=true \
-    tunnel.decode=false \
-    tunnel.audiovideo.decode=false \
-    tunnel.multiple=false
-
-# aDSP
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.qualcomm.sensors.qmd=false \
-    debug.qualcomm.sns.hal=w \
-    ro.qc.sdk.sensors.gestures=false \
-    ro.qc.sensors.max_accel_rate=false \
-    ro.qc.sensors.max_gyro_rate=false \
-    ro.qc.sensors.max_mag_rate=false \
-    ro.qualcomm.sensors.pedometer=false \
-    ro.qualcomm.sensors.pam=false \
-    ro.qualcomm.sensors.scrn_ortn=false
-
-# QCOM Display
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.gralloc.cp.level3=1 \
-    debug.sf.hw=1 \
-    debug.egl.hw=1 \
-    persist.hwc.mdpcomp.enable=true \
-    debug.mdpcomp.logs=0
-
-# WFD
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.debug.wfd.enable=1 \
-    persist.sys.wfd.virtual=0
-
-# HDMI
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.demo.hdmirotationlock=false
+   ro.telephony.call_ring.multiple=0 \
+   ro.telephony.ril_class=ZTEQualcommUiccRIL
 
 # Time
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.timed.enable=true
+   persist.timed.enable=true
 
 # VIDC debug_levels
 # 1:ERROR 2:HIGH 4:LOW 0:NOLOGS 7:AllLOGS
 PRODUCT_PROPERTY_OVERRIDES += \
-    vidc.debug.level=1
+   vidc.debug.level=1
+
+PRODUCT_PROPERTY_OVERRIDES += \
+   ro.chipname=msm8974 \
+   ro.sf.lcd_density=480 \
+
+# OpenGL ES 3.0
+PRODUCT_PROPERTY_OVERRIDES += \
+   ro.opengles.version=196608 \
+   debug.composition.type=c2d
+
+# Audio Configuration
+PRODUCT_PROPERTY_OVERRIDES += \
+   persist.audio.fluence.voicecall=true \
+   persist.audio.dualmic.config=endfire
+
+PRODUCT_PROPERTY_OVERRIDES += \
+   af.resampler.quality=4 \
+   audio.offload.buffer.size.kb=32 \
+   audio.offload.gapless.enabled=true \
+   av.offload.enable=true
+
+# Do not power down SIM card when modem is sent to Low Power Mode.
+PRODUCT_PROPERTY_OVERRIDES += \
+   persist.radio.apm_sim_not_pwdn=1
+
+#Upto 3 layers can go through overlays
+PRODUCT_PROPERTY_OVERRIDES += \
+   com.qc.hardware=true \
+   debug.sf.hw=1 \
+   debug.egl.hw=1 \
+   persist.hwc.mdpcomp.enable=true \
+   debug.mdpcomp.logs=0
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.bt.hci_transport=smd
 
-# Radio and Telephony
-PRODUCT_PROPERTY_OVERRIDES += \
-    telephony.lteOnCdmaDevice=0 \
-    telephony.lteOnGsmDevice=1 \
-    ro.ril.transmitpower=true \
-    persist.radio.add_power_save=1 \
-    persist.radio.oem_socket=false
-
-# Do not power down SIM card when modem is sent to Low Power Mode.
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.radio.apm_sim_not_pwdn=1
-
-# Ril sends only one RIL_UNSOL_CALL_RING, so set call_ring.multiple to false
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.call_ring.multiple=0
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
-
-# QCOM
-PRODUCT_PROPERTY_OVERRIDES += \
-    com.qc.hardware=true
-
-# QC Perf
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.extension_library=/system/vendor/lib/libqc-opt.so
-
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.interface=wlan0 \
-    wifi.supplicant_scan_interval=15
+    wifi.interface=wlan0
+#    wifi.supplicant_scan_interval=15
+
+PRODUCT_PROPERTY_OVERRIDES += \
+   ro.kernel.android.checkjni=0 \
+   ro.com.google.clientidbase=android-zte \
+   ro.com.google.clientidbase.ms=android-zte \
+   ro.com.google.clientidbase.am=android-zte \
+   ro.com.google.clientidbase.gmm=android-zte \
+   ro.com.google.clientidbase.yt=android-zte
+
+# Set default USB interface
+PRODUCT_PROPERTY_OVERRIDES += \
+   persist.sys.usb.config=mtp,adb
 
 # Include NX503A-vendor
 $(call inherit-product, vendor/zte/NX503A/NX503A-vendor.mk)
 
 # OpenGL ES 3.0
 $(call inherit-product, vendor/zte/qcom-common/qcom-common-vendor-330.mk)
-
 

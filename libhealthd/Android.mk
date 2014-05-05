@@ -1,4 +1,5 @@
-# Copyright (C) 2011 The Android Open Source Project
+# Copyright (C) 2013 The Android Open Source Project
+# Copyright (C) 2013 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,15 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-LOCAL_PATH:= $(call my-dir)
+LOCAL_PATH := $(call my-dir)
+
 include $(CLEAR_VARS)
-
-LOCAL_C_INCLUDES := frameworks/native/cmds/dumpstate
-
-LOCAL_SRC_FILES := dumpstate.c
-
-LOCAL_MODULE := libdumpstate.msm8974
-
-LOCAL_MODULE_TAGS := optional
-
+LOCAL_SRC_FILES := healthd_board_default.cpp
+LOCAL_MODULE := libhealthd.qcom
+LOCAL_C_INCLUDES := system/core/healthd
 include $(BUILD_STATIC_LIBRARY)
+

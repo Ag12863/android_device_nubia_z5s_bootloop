@@ -21,7 +21,6 @@ if [ "x$NC" != "x1" ];
 then
     rm -rf $BASE/*
 fi
-
 for FILE in `cat proprietary-files.txt | grep -v ^# | grep -v ^$`; do
     DIR=`dirname $FILE`
     if [ ! -d $BASE/$DIR ]; then
